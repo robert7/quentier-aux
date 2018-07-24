@@ -3,6 +3,8 @@
 # simple build helper with some "pre configuration"
 # can be later improved e.g. to give qt version (or directory) per parameter
 #
+# the current directory is expected to be the "libquentier" project directory
+#
 
 BUILD_TYPE=${1}
 COMPILER=${2}
@@ -10,6 +12,8 @@ CLEAN=${3}
 APPDIR=/usr/local
 
 CDIR=`pwd`
+QUENTIER_AUX=../quentier-aux
+PROG_MODULE=libquentier
 
 function error_exit {
     echo "***********error_exit***********"
@@ -20,10 +24,13 @@ function error_exit {
     exit 1
 }
 
-if [ ! -f src/utility/ApplicationSettings.cpp ]; then
+if [ ! -f src/utility/ApplicationSettings.cpp ] || [ ! -f ${QUENTIER_AUX}/build-${PROG_MODULE}.sh ]; then
   echo "You seem to be in wrong directory. script MUST be run from the project directory."
   exit 1
 fi
+
+# copy unversioned file to aux directory
+cp -rf .gitignore .idea/ ${QUENTIER_AUX}/${PROG_MODULE}
 
 
 echo $0: running in ${CDIR}
@@ -64,6 +71,7 @@ cd ${BUILD_DIR}
 #mkdir ${APPDIR}
 
 
+# build with sanitizers: -DSANITIZE_ADDRESS=YES
 
 EXEC="cmake .. -DCMAKE_INSTALL_PREFIX=${APPDIR} -DCMAKE_BUILD_TYPE=Debug -DUSE_QT5=1 -DUSE_QT5_WEBKIT=1 -DBREAKPAD_ROOT=/usr/local -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
 echo $EXEC
