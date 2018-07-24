@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="quentier - secondary profile" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--storageDir $USER_HOME$/.quentier2" PASS_PARENT_ENVS_2="true" PROJECT_NAME="quentier" TARGET_NAME="quentier" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="quentier" RUN_TARGET_NAME="quentier">
+    <method />
+  </configuration>
+</component>
