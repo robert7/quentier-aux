@@ -24,8 +24,11 @@ function error_exit {
     exit 1
 }
 
-if [ ! -f src/utility/ApplicationSettings.cpp ] || [ ! -f ${QUENTIER_AUX}/build-${PROG_MODULE}.sh ]; then
-  echo "You seem to be in wrong directory. script MUST be run from the project directory."
+CHK_F1=src/utility/ApplicationSettings.cpp
+CHK_F2=${QUENTIER_AUX}/build-${PROG_MODULE}.sh
+if [ ! -f "${CHK_F1}" ] || [ ! -f "${CHK_F2}" ]; then
+  echo "You seem to be in wrong directory. script MUST be run from the project directory"
+  echo "Check: ${CHK_F1}, ${CHK_F2}"
   exit 1
 fi
 
